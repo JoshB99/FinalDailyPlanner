@@ -1,9 +1,10 @@
 package com.example.finaldailyplanner;
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,45 +13,32 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private ListView lv;
+    private ArrayList<Goal> modelArrayList;
     private CustomAdapter customAdapter;
+    private  String[] descriptionlist = new String[]{"Lion", "Tiger", "Leopard", "Cat", "Cheetah", "Bear",
+            "Mouse", "Dog", "Squirrel", "Snake", "Lizard", "Bird", "Rabbit", "Pig", "Cow", "Sheep"};
     private DrawerLayout nDrawerLayout;
     private ActionBarDrawerToggle nToggle;
-    DatabaseHelper mDatabaseHelper;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lv = findViewById(R.id.listView);
+        lv = (ListView) findViewById(R.id.listView);
 
-        mDatabaseHelper = new DatabaseHelper(this);
-
-        Cursor data = mDatabaseHelper.getData();
-        final ArrayList<Goal> listData = new ArrayList<>();
-        while(data.moveToNext()){
-            //get the value from the database in column 1
-            //then add it to the ArrayList
-            Goal model = new Goal();
-            model.setSelected((data.getInt(3) > 0 ));
-            model.setDescription(data.getString(1));
-            listData.add(model);
-        }
-
-        customAdapter = new CustomAdapter(this,listData);
+        modelArrayList = getGoal(false);
+        customAdapter = new CustomAdapter(this,modelArrayList);
         lv.setAdapter(customAdapter);
-
-
 
         nDrawerLayout = findViewById(R.id.drawerLayout);
         nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.closed);
@@ -63,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,34 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String task = listData.get(i).getDescription();
-
-                Cursor data = mDatabaseHelper.getItemID(task); //get the id associated with that name
-                int itemID = -1;
-                while(data.moveToNext()){
-                    itemID = data.getInt(0);
-                }
-                if(itemID > -1){
-                    Intent editScreenIntent = new Intent(MainActivity.this, EditTask.class);
-                    editScreenIntent.putExtra("id",itemID);
-                    editScreenIntent.putExtra("task",task);
-                    data = mDatabaseHelper.getLinkedGoal(Integer.toString(itemID));
-                    String linkedGoal = "";
-                    while(data.moveToNext()){
-                        linkedGoal = data.getString(0);
-                    }
-                    editScreenIntent.putExtra("linkedGoal", linkedGoal);
-                    startActivity(editScreenIntent);
-                }
-                else{
-                    toastMessage("No ID associated with that name");
-                }
-            }
-        });
     }
 
     @Override
@@ -130,7 +90,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    private ArrayList<Goal> getGoal(boolean isSelect){
+        ArrayList<Goal> list = new ArrayList<>();
+        for(int i = 0; i < 16; i++){
+
+            Goal model = new Goal();
+            model.setSelected(isSelect);
+            model.setDescription(descriptionlist[i]);
+            list.add(model);
+        }
+        return list;
     }
 }
