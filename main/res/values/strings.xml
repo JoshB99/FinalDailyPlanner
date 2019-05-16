@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">My Daily Goals</string>
+    <string name="open">Open</string>
+    <string name="closed">Closed</string>
+    <string name="add_a_task">Add a Task</string>
+    <string name="task">Task</string>
+    <string name="create">Create</string>
+    <string name="title_activity_add__a__goal">Add_A_Goal</string>
+    <string name="add_a_goal">Add a Goal</string>
+    <string name="Arrow"><![CDATA[<]]></string>
+    <string name="feedbacktype1">Type</string>
+    <string name="feedbacktype2">Gripe</string>
+    <string name="feedbacktype3">Suggestion</string>
+    <string name="feedbacktype4">Bug</string>
+    <string name="feedbacktitle">Add a Goal</string>
+    <string name="select_date">Deadline</string>
+    <string name="Description">Description</string>
+    <string name="name"> Name</string>
+    <string name="edit_a_task">Edit a Task</string>
+    <string name="edit_a_goal">Edit a Goal</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+</resources>
