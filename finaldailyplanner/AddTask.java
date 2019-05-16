@@ -45,22 +45,6 @@ public class AddTask<imageButton> extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdownmenu.setAdapter(adapter);
 
-        dropdownmenu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                String itemvalue = parent.getItemAtPosition(position).toString();
-
-                Toast.makeText(AddTask.this, "Selected: "+ itemvalue, Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

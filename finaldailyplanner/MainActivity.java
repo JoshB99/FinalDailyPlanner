@@ -1,11 +1,9 @@
 package com.example.finaldailyplanner;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,8 +12,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDatabaseHelper = new DatabaseHelper(this);
 
         Cursor data = mDatabaseHelper.getData();
-        ArrayList<Goal> listData = new ArrayList<>();
+        final ArrayList<Goal> listData = new ArrayList<>();
         while(data.moveToNext()){
             //get the value from the database in column 1
             //then add it to the ArrayList
@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         customAdapter = new CustomAdapter(this,listData);
         lv.setAdapter(customAdapter);
+
+
 
         nDrawerLayout = findViewById(R.id.drawerLayout);
         nToggle = new ActionBarDrawerToggle(this, nDrawerLayout, R.string.open, R.string.closed);
@@ -69,6 +71,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String task = listData.get(i).getDescription();
+
+                Cursor data = mDatabaseHelper.getItemID(task); //get the id associated with that name
+                int itemID = -1;
+                while(data.moveToNext()){
+                    itemID = data.getInt(0);
+                }
+                if(itemID > -1){
+                    Intent editScreenIntent = new Intent(MainActivity.this, EditTask.class);
+                    editScreenIntent.putExtra("id",itemID);
+                    editScreenIntent.putExtra("task",task);
+                    data = mDatabaseHelper.getLinkedGoal(Integer.toString(itemID));
+                    String linkedGoal = "";
+                    while(data.moveToNext()){
+                        linkedGoal = data.getString(0);
+                    }
+                    editScreenIntent.putExtra("linkedGoal", linkedGoal);
+                    startActivity(editScreenIntent);
+                }
+                else{
+                    toastMessage("No ID associated with that name");
+                }
+            }
+        });
     }
 
     @Override
@@ -98,5 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

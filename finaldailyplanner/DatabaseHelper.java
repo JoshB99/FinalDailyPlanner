@@ -81,18 +81,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Returns only the ID that matches the name passed in
+     * @param ID
+     * @return
+     */
+    public Cursor getLinkedGoal(String ID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COL3 + " FROM " + TABLE_NAME +
+                " WHERE " + COL1 + " = '" + ID + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
      * Updates the name field
      * @param newName
      * @param id
      * @param oldName
+     * @param newLinkedGoal
      */
-    public void updateName(String newName, int id, String oldName){
+    public void updateTask(String newName, int id, String oldName, String newLinkedGoal){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
-                " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
+                " = '" + newName + "', " + COL3 + " = '" + newLinkedGoal + "' WHERE " + COL1 + " = '" + id + "'" +
                 " AND " + COL2 + " = '" + oldName + "'";
         Log.d(TAG, "updateName: query: " + query);
         Log.d(TAG, "updateName: Setting name to " + newName);
+        db.execSQL(query);
+    }
+
+    /**
+     * Updates checkbox
+     * @param selected
+     */
+    public void selectCheckbox(int selected, int id, String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL4 +
+                " = '" + selected + "' WHERE " + COL1 + " = '" + id + "'" +
+                " AND " + COL2 + " = '" + name + "'";
         db.execSQL(query);
     }
 
