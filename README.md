@@ -36,8 +36,15 @@ Steps:
 
 Features:
 
-	A. A list of all your current daily tasks is displayed on your homescreen along with the option the check them off when finished.
+	A. A list of all your current daily tasks is displayed on your 
+	homescreen along with the option the check them off when finished.
 	
-	B. You can add a new task by cliking the little circular button in the lower right corner. This will take you to another screen where you can choose a name for your task along with being able to link it to a long term-goal. From the hompage you also have the ability to click on a goal to edit it or delete it.
+	B. You can add a new task by cliking the little circular button in the lower right corner. 
+	This will take you to another screen where you can choose a name for your task along with 
+	being able to link it to a long term-goal. 
+	From the hompage you also have the ability to click on a goal to edit it or delete it.
 	
-	C. If you navigate to the side menu you are able to access the page in which your long term-goals are stored. From this page you can not only review your long term goals but you can add new ones, edit old ones, and delete irrelavent ones. In the add a goal page you will be asked to give a name, type, deadline, and description.
+	C. If you navigate to the side menu you are able to access the page in which your long term-goals and habit-goals are stored. 
+	From this page you can not only review your long term  and habit goals but you can 
+	add new ones, edit old ones, and delete irrelavent ones. 
+	In the add a goal page you will be asked to give a name, type, deadline, and description.
