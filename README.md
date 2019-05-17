@@ -32,9 +32,8 @@ In this project we attempted to make a fully functioning application which alows
 9. Wait for the app to build and then open on your smartphone. 
 	
 10. Take a look around you new guide to productivity.
-	
 
-###Features:
+### Features:
 
 - A list of all your current daily tasks is displayed on your homescreen along with the option the check them off when finished.
 	
