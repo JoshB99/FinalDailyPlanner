@@ -23,7 +23,7 @@ Steps:
 
 	#5 Click open and select the repository that you just downloaded from GitHub.
 
-	#6 Wait fo the program to boot up.
+	#6 Wait for the program to boot up.
 	
 	#7 Connect your smartphone to the computer using the data cable.
 	
