@@ -1,5 +1,5 @@
 # FinalDailyPlanner
-In this project we attempted to make a fully functioning application which alows you to organize you life through both daily tasks and longterm goals.
+In this project we attempted to make a fully functioning application which alows you to organize you life through both daily tasks and long-term goals.
 
 ### Things you will need:
 	
@@ -40,3 +40,8 @@ In this project we attempted to make a fully functioning application which alows
 - You can add a new task by cliking the little circular button in the lower right corner. This will take you to another screen where you can choose a name for your task along with being able to link it to a long term-goal. From the hompage you also have the ability to click on a goal to edit it or delete it.
 	
 - If you navigate to the side menu you are able to access the page in which your long term-goals and habit-goals are stored. From this page you can not only review your long term  and habit goals but you can add new ones, edit old ones, and delete irrelavent ones. In the add a goal page you will be asked to give a name, type, deadline, and description.
+
+### Contact Us
+
+- Joshuahblank@gmail.com
+- Sinocanam@gmail.com
